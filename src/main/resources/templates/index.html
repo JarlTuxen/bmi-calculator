@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>BMI Calcultator</title>
+</head>
+<body>
+    <div class="container">
+        <!-- partly from https://code-boxx.com/simple-javascript-bmi-calculator/ -->
+
+        <form onsubmit="return calcBMI();">
+            <div class="mb3">
+                <label for="bmi-weight" class="form-label">Weight (kg)</label>
+                <input class="form-control" id="bmi-weight" required placeholder="please enter weight"/>
+            </div>
+
+            <div class="mb3">
+                <label for="bmi-height" class="form-label">Height (cm)</label>
+                <input class="form-control" id="bmi-height" required placeholder="please enter height"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Calculate BMI</button>
+
+        </form>
+        <div class="row" id="bmi-results"></div>
+    </div>
+<script>
+    function calcBMI(){
+        let weight = parseFloat(document.getElementById("bmi-weight").value);
+        let height = parseFloat(document.getElementById("bmi-height").value);
+        let results = document.getElementById("bmi-results");
+
+        height = height / 100;
+        bmi = weight / (height * height);
+        bmi = Math.round(bmi * 100) / 100; // Round off 2 decimal places
+
+        if (bmi < 18.5) {
+            results.innerHTML = bmi + " - Underweight";
+        } else if (bmi < 25) {
+            results.innerHTML = bmi + " - Normal weight";
+        } else if (bmi < 30) {
+            results.innerHTML = bmi + " - Pre-obesity";
+        } else if (bmi < 35) {
+            results.innerHTML = bmi + " - Obesity class I";
+        } else if (bmi < 40) {
+            results.innerHTML = bmi + " - Obesity class II";
+        } else {
+            results.innerHTML = bmi + " - Obesity class III";
+        }
+
+        return false; // must return something
+
+    }
+</script>
+</body>
+</html>
